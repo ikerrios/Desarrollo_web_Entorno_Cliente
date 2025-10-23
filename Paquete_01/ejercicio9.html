@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <!-- Modifica el programa t2e4_ifelse para que realice la misma operación pero utilizando un 
+    switch.-->
+
+    <script>
+        var pregunta = prompt ("¿Cuantos años tienes?: ");
+
+        var respuesta = parseInt(pregunta);
+
+        alert ("Su edad es: " + respuesta)
+        
+        switch(true) {
+            
+            case (respuesta >= 0 && respuesta <= 12):
+                alert ("Eres un niño");
+                break;
+            case (respuesta >= 13 && respuesta <= 26):
+                alert ("Eres un joven"); 
+                break;
+            case (respuesta >= 27 && respuesta <= 60):
+                alert ("Eres un viejo.");
+                break;
+            case (respuesta > 60): 
+                alert ("Estas para el arrastre.")
+                break;
+            default:  
+                alert ("error");
+            break;
+        }
+    </script>
+</body>
+</html>
