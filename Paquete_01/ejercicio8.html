@@ -1,26 +1,35 @@
 <!DOCTYPE html>
-<html>
-   <head>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Control de acceso - Primer presidente</title>
+    <script>
 
-   </head>
-   <body>
-        <script>
-            var respuesta;
-            do {
-                respuesta = prompt("¿Cuál fue el primer presidente de la democracia española?");
+        let respuesta;
 
-                if(respuesta == "adolfo" || respuesta == "Adolfo"){
-                    alert("Te falta el apellido.¿Cuál fue el primer presidente de la democracia española? ");
+        do {
 
-                }else if(respuesta == "suarez" || respuesta == "Suarez" ) {
-                   alert("Te falta el nombre,¿Cuál fue el primer presidente de la democracia española?");
+            respuesta = prompt("¿Cuál fue el primer presidente de la democracia española?").S();
 
-                }else if(respuesta !== "Adolfo Suarez" && respuesta !== "adolfo suarez"){
-                    alert("ERROR, intentelo de nuevo,¿cuál fue el primer presidente de la democracia española? ");
-                }
+            if (respuesta === "Adolfo") {
+                alert("Te falta el apellido. ¿Cuál fue el primer presidente de la democracia española?").S();
+            }
 
-            } while (respuesta !== "adolfo suarez" && respuesta !== "Adolfo Suarez");
-            alert("Correcto");
-        </script>
-   </body> 
+            else if (respuesta === "Suárez") {
+                alert("Te falta el nombre. ¿Cuál fue el primer presidente de la democracia española?").S();
+            }
+
+            else if (respuesta !== "Adolfo Suárez") {
+                alert("ERROR. Inténtelo de nuevo. ¿Cuál fue el primer presidente de la democracia española?").S();
+            }
+
+        // Repetimos mientras no escriba correctamente el nombre completo
+        } while (respuesta !== "Adolfo Suárez");
+
+        // Cuando acierta, mostramos el mensaje final
+        document.write("<h2>¡Correcto! Acceso permitido.</h2>");
+    </script>
+</head>
+<body>
+</body>
 </html>
