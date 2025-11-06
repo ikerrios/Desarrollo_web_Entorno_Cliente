@@ -7,6 +7,8 @@
     <script src = "imc.js" defer></script>
     <script src = "categoria.js" defer></script>
     <script src = "fcm.js" defer></script>
+    <script src = "horario.js" defer></script>
+    <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
     <header>
@@ -34,6 +36,12 @@
         <button type= "submit">Enviar</button>
     </form></br>
 
+    <h2>Calculadora de Horario</h2>
+    <form onsubmit="return calcularHorario(event)">
+        <b><i>algo: <input type="text" id="entradaHorario" placeholder="Introduce algo"></i></b>
+        <button type="submit">Ir</button>
+    </form>
+    <div id="resultado"></div>
     <footer>
 
     </footer>

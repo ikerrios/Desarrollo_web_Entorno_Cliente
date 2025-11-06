@@ -2,6 +2,11 @@ function calcularIMC() {
     let peso = parseInt(document.getElementById('peso').value);
     let centimetros = parseInt(document.getElementById('estatura').value);
 
+    if(!peso || !centimetros) {
+        alert("Por favor, introduzca dígitos.");
+        exit;
+    }
+
     if (peso <= 0 || centimetros <= 0) {
         alert("Introduzca un número válido");
     } else {

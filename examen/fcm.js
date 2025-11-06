@@ -2,14 +2,14 @@
             let edad = parseInt(document.getElementById('edad').value);
             let sexo = document.getElementById('sexo').value.toLowerCase();
 
-            if (isNaN(edad) || edad <= 0 || (sexo !== "hombre" && sexo !== "mujer")) {
+            if (isNaN(edad) || edad <= 0 || (sexo !== "hombre" && sexo !== "mujer")) { //Si no es número, menor o igual a 0, ni hombre ni mujer, error.
                 alert("Introduzca valores válidos.");
                 return;
             }
 
-            let fcm = (sexo === "hombre") ? (220 - edad) : (226 - edad);
+            let fcm = (sexo === "hombre") ? (220 - edad) : (226 - edad); //sexo es hombre? se mete en 220-edad, que no es hombre? se mete en 226-edad (interprentando que es mujer).
 
-            let recMin = (fcm * 0.6).toFixed(0); //redondea al número que quiero.
+            let recMin = (fcm * 0.6).toFixed(0); //redondea al número que quiero. * se debe al %.
             let recMax = (fcm * 0.7).toFixed(0);
             let aeroMin = (fcm * 0.7).toFixed(0);
             let aeroMax = (fcm * 0.8).toFixed(0);
