@@ -8,6 +8,11 @@
     <script src = "t3e2_domingos.js" defer></script>
     <script src = "t3e3_formatofechas.js" defer></script>
     <script src = "t3e4_formatohoras.js" defer></script>
+    <script src = "t3e5_math.js" defer></script>
+    <script src = "t3e6_circulo.js" defer></script>
+    <script src = "t3e7_number.js" defer></script>
+    <script src = "t3e8_nombreapellidos.js" defer></script>
+    <script src = "t3e9_contraseña.js" defer></script>
 </head>
 <body>
     <h2>ejercicio1</h2>
@@ -29,9 +34,51 @@
     </form></br>
 
     <h2>Ejercicio 4:</h2>
-    <form action = "" onsubmit = "ejercicio4()">
+    <form action = "" onsubmit = "ejercicio4(); return false;">
         <i><b>Tipo de Formato: <input type="number" id="formato" placeholder="1 o 2"></b></i>
         <button type= "submit">Enviar</button>
     </form></br>
+
+    <h2>Ejercicio 5:</h2>
+    <form action="" onsubmit="ejercicio5(); return false;">
+        <i><b>Opción del menú (1-4): 
+            <input type="number" id="opcionMath" placeholder="1, 2, 3 o 4">
+        </b></i>
+        <button type="submit">Enviar</button>
+    </form><br>
+
+    <h2>Ejercicio 6:</h2>
+    <form action="" onsubmit="ejercicio6(); return false;">
+        <i><b>Valor del radio (cm): 
+            <input type="number" id="radio" placeholder="Introduce el radio">
+        </b></i>
+        <button type="submit">Enviar</button>
+    </form><br>
+
+    <h2>Ejercicio 7:</h2>
+    <form action="" onsubmit="ejercicio7(); return false;">
+        <i><b>Número entero: 
+            <input type="number" id="numeroEntero" placeholder="Introduce un entero">
+        </b></i>
+        <button type="submit">Enviar</button>
+    </form><br>
+
+    <h2>Ejercicio 8:</h2>
+    <form action="" onsubmit="ejercicio8(); return false;">
+        <i><b>Nombre y apellidos: 
+            <input type="text" id="nombreCompleto" placeholder="Nombre y dos apellidos">
+        </b></i>
+        <button type="submit">Enviar</button>
+    </form><br>
+
+    <h2>Ejercicio 9:</h2>
+    <form action="" onsubmit="ejercicio9(); return false;">
+        <i><b>Contraseña: 
+            <input type="password" id="contrasena" placeholder="Introduce tu contraseña">
+        </b></i>
+        <button type="submit">Enviar</button>
+    </form><br>
+
+
 </body>
 </html>
