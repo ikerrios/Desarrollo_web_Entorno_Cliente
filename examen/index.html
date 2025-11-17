@@ -8,6 +8,7 @@
     <script src = "categoria.js" defer></script>
     <script src = "fcm.js" defer></script>
     <script src = "horario.js" defer></script>
+    <script src="script.js" defer></script>
     <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
@@ -42,8 +43,21 @@
         <button type="submit">Ir</button>
     </form>
     <div id="resultado"></div>
-    <footer>
 
+     <h2>Comprobación de contraseña segura</h2>
+        <form onsubmit="return t3e9_contraseña(event);">
+            <b><i>Contraseña:
+                <input type="text" id="contrasena" placeholder="Introduce tu contraseña">
+            </i></b>
+            <button type="submit">Comprobar</button>
+        </form><br>
+    <footer>
+        <p>Asociación Deportiva Castro Urdiales.</p>
+        <p>Web desarrollada por: Tu Nombre y Apellidos</p>
+        <p>
+            Aviso legal:
+            <a href="#" onclick="abrirAvisoLegal(); return false;">ver aviso legal</a>
+        </p>
     </footer>
 </body>
 </html>
