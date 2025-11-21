@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>t3e1_fincurso</title>
+</head>
+<body>
+  <script>
+  // Muestra los días que faltan desde hoy hasta fin de curso (24 de junio)
+  (function() {
+    const hoy = new Date();
+    const year = hoy.getFullYear();
+    // Meses empiezan en 0 -> junio es 5
+    let fin = new Date(year, 5, 24);
+    
+    if (hoy > fin) fin = new Date(year + 1, 5, 24);
+      const msDia = 24 * 60 * 60 * 1000;
+      const dias = Math.ceil((fin - hoy) / msDia);
+      document.write("<h1>Días hasta fin de curso (24/06): " + dias + "</h1>");
+  })();
+  </script>
+  </body>
+</html>

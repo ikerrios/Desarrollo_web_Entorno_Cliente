@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>t3e7_number</title>
+</head>
+<body>
+<script>
+// Pide un entero y muestra: exponencial, 4 decimales, binario, octal, hexadecimal
+(function(){
+  const n = parseInt(prompt("Número entero:"));
+  if (isNaN(n)) {
+    document.write("Valor inválido.");
+    return;
+  }
+  // Exponencial
+  const exp = n.toExponential(); // nota: puede mostrar e+
+  // 4 decimales
+  const dec = Number(n).toFixed(4);
+  // Binario (8 bits con padding)
+  const bin = (n >>> 0).toString(2).padStart(8, "0");
+  // Octal
+  const oct = (n >>> 0).toString(8);
+  // Hex con prefijo 0x
+  const hex = "0x" + (n >>> 0).toString(16);
+
+  document.write("<ul>");
+  document.write("<li>Exponencial: " + exp + "</li>");
+  document.write("<li>4 decimales: " + dec + "</li>");
+  document.write("<li>Binario: " + bin + "</li>");
+  document.write("<li>Octal: " + oct + "</li>");
+  document.write("<li>Hexadecimal: " + hex + "</li>");
+  document.write("</ul>");
+})();
+</script>
+</body>
+</html>

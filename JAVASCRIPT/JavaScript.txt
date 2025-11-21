@@ -1,0 +1,6 @@
+JS 	
+	-> Lado del cliente
+	-> Lenguaje interpretado
+	-> Lenguaje orientado a objetos y basado en prototipos
+	-> Imperativo y estructurado
+	-> Tipificación débil y dinámica

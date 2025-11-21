@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>t3e3_formatofechas</title>
+</head>
+<body>
+<script>
+// Muestra fecha actual en formato según opción (1,2,3)
+(function() {
+  const opcion = prompt("Formato: 1) 17/02/2016  2) Miércoles, 17 de febrero de 2016.  3) Wednesday, February 17, 2016.");
+  const n = parseInt(opcion);
+  const f = new Date();
+  const dia = f.getDate();
+  const mes = f.getMonth(); // 0-11
+  const anyo = f.getFullYear();
+  const semanaES = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
+  const mesesES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+  const semanaEN = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  const mesesEN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  function pad(n){return String(n).padStart(2,"0");}
+  let salida = "";
+  if (n === 1) {
+    salida = pad(dia) + "/" + pad(mes+1) + "/" + anyo;
+  } else if (n === 2) {
+    salida = semanaES[f.getDay()] + ", " + dia + " de " + mesesES[mes] + " de " + anyo + ".";
+  } else if (n === 3) {
+    salida = semanaEN[f.getDay()] + ", " + mesesEN[mes] + " " + dia + ", " + anyo + ".";
+  } else {
+    salida = "Opción no válida.";
+  }
+  document.write("<h2>" + salida + "</h2>");
+})();
+</script>
+</body>
+</html>

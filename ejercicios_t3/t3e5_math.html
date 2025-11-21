@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>t3e5_math</title>
+</head>
+<body>
+<script>
+// Menú Math: 1 Potencia, 2 Raíz, 3 Redondeo, 4 Trigonometría
+(function(){
+  const op = parseInt(prompt("Elige opción:\n1. Potencia\n2. Raíz\n3. Redondeo\n4. Trigonometría"));
+  function show(msg){ document.write("<p>"+msg+"</p>"); }
+  if (op === 1) {
+    const base = parseFloat(prompt("Base:"));
+    const exp  = parseFloat(prompt("Exponente:"));
+    const res = Math.pow(base, exp);
+    show("La potencia de " + base + " elevado a " + exp + " es: " + res);
+  } else if (op === 2) {
+    const n = parseFloat(prompt("Número (>=0):"));
+    if (isNaN(n) || n < 0) show("Número inválido.");
+    else show("La raíz de " + n + " es: " + Math.sqrt(n));
+  } else if (op === 3) {
+    const d = parseFloat(prompt("Decimal:"));
+    if (isNaN(d)) show("Número inválido.");
+    else {
+      show("Redondeo al más próximo: " + Math.round(d));
+      show("Redondeo al alza (ceil): " + Math.ceil(d));
+      show("Redondeo a la baja (floor): " + Math.floor(d));
+    }
+  } else if (op === 4) {
+    const grados = parseFloat(prompt("Ángulo (0-360):"));
+    if (isNaN(grados) || grados < 0 || grados > 360) show("Ángulo inválido.");
+    else {
+      const rad = grados * Math.PI / 180;
+      const seno = Math.sin(rad);
+      const cos  = Math.cos(rad);
+      const tan  = Math.tan(rad);
+      show("Seno: " + seno);
+      show("Coseno: " + cos);
+      show("Tangente: " + (Math.abs(cos) < 1e-12 ? "∞" : tan));
+    }
+  } else {
+    show("Opción no válida.");
+  }
+})();
+</script>
+</body>
+</html>

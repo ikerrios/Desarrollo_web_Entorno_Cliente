@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>t3e6_circulo</title>
+</head>
+<body>
+<script>
+// Pide radio y muestra: radio, diámetro, perímetro circunferencia, área círculo, área esfera, volumen esfera
+(function(){
+  const r = parseFloat(prompt("Radio (en cm):"));
+  if (isNaN(r) || r <= 0) {
+    document.write("Valor de radio inválido.");
+    return;
+  }
+  const pi = Math.PI;
+  const diametro = 2 * r;
+  const perimetro = 2 * pi * r;
+  const areaCirculo = pi * r * r;
+  const areaEsfera = 4 * pi * r * r;
+  const volEsfera = (4/3) * pi * r * r * r;
+
+  function fmt(n){ return n.toFixed(2).replace(".", ","); }
+
+  document.write("<ul>");
+  document.write("<li>Radio: " + fmt(r) + " cm</li>");
+  document.write("<li>Diámetro: " + fmt(diametro) + " cm</li>");
+  document.write("<li>Perímetro circunferencia: " + fmt(perimetro) + " cm</li>");
+  document.write("<li>Área círculo: " + fmt(areaCirculo) + " cm²</li>");
+  document.write("<li>Área esfera: " + fmt(areaEsfera) + " cm²</li>");
+  document.write("<li>Volumen esfera: " + fmt(volEsfera) + " cm³</li>");
+  document.write("</ul>");
+})();
+</script>
+</body>
+</html>

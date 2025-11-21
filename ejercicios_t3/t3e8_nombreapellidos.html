@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>t3e8_nombreapellidos</title>
+</head>
+<body>
+<script>
+// Pide nombre y apellidos y muestra transformaciones y propuestas de usuario
+(function(){
+  const nombre = prompt("Nombre:");
+  const ap1 = prompt("Primer apellido:");
+  const ap2 = prompt("Segundo apellido:");
+  if (!nombre || !ap1 || !ap2) {
+    document.write("Datos inválidos.");
+    return;
+  }
+  const completo = (nombre + " " + ap1 + " " + ap2).trim();
+  const sinEspacios = completo.replace(/\s+/g,"");
+  const tam = sinEspacios.length;
+
+  const minus = completo.toLowerCase();
+  const mayus = completo.toUpperCase();
+
+  // Mostrar en 3 líneas
+  document.write("<p>Nombre: " + nombre + "</p>");
+  document.write("<p>Apellido 1: " + ap1 + "</p>");
+  document.write("<p>Apellido 2: " + ap2 + "</p>");
+
+  document.write("<hr>");
+  document.write("<p>Tamaño (sin espacios): " + tam + "</p>");
+  document.write("<p>Minúsculas: " + minus + "</p>");
+  document.write("<p>Mayúsculas: " + mayus + "</p>");
+
+  // Propuesta 1: inicial del nombre + primer apellido + inicial del segundo apellido
+  const propuesta1 = (nombre[0] + ap1 + (ap2[0]||"")).toLowerCase().replace(/\s+/g,"");
+  // Propuesta 2: tres primeras letras de nombre y de los dos apellidos
+  function tres(x){ return (x || "").substring(0,3).toLowerCase(); }
+  const propuesta2 = (tres(nombre) + tres(ap1) + tres(ap2)).replace(/\s+/g,"");
+
+  document.write("<hr>");
+  document.write("<p>Usuario 1: " + propuesta1 + "</p>");
+  document.write("<p>Usuario 2: " + propuesta2 + "</p>");
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>t3e2_domingos</title>
+</head>
+<body>
+<script>
+// Pide día y mes (0-11) y lista los años hasta 2100 donde cae en domingo
+(function() {
+  const hoy = new Date();
+  const inicio = hoy.getFullYear();
+  const d = parseInt(prompt("Día de cumple (1-31):"));
+  const m = parseInt(prompt("Mes de cumple (0-11, recuerda que Enero=0):"));
+  if (isNaN(d) || isNaN(m) || d < 1 || d > 31 || m < 0 || m > 11) {
+    document.write("Parámetros inválidos.");
+    return;
+  }
+  let lista = [];
+  for (let y = inicio; y <= 2100; y++) {
+    const fecha = new Date(y, m, d);
+    if (fecha.getMonth() === m && fecha.getDate() === d) { // fecha válida
+      if (fecha.getDay() === 0) lista.push(y);
+    }
+  }
+  document.write("<h2>Años con cumpleaños en domingo:</h2>");
+  if (lista.length === 0) document.write("Ninguno hasta 2100.");
+  else document.write(lista.join(", "));
+})();
+</script>
+</body>
+</html>

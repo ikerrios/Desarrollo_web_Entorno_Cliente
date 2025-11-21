@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>t3e4_formatohoras</title>
+</head>
+<body>
+<script>
+// Muestra hora actual en formato según opción
+(function(){
+  const opcion = prompt("Formato hora: 1) 14:35:07  2) 02:35 PM (o 02:35:07 AM)");
+  const now = new Date();
+  let h = now.getHours(), m = now.getMinutes(), s = now.getSeconds();
+  function pad(n){ return String(n).padStart(2,"0"); }
+  let salida = "";
+  if (parseInt(opcion) === 1) {
+    salida = pad(h)+":"+pad(m)+":"+pad(s);
+  } else if (parseInt(opcion) === 2) {
+    const ampm = h >= 12 ? "PM" : "AM";
+    let hh = h % 12; if (hh === 0) hh = 12;
+    // Mostramos con segundos para cubrir ambos ejemplos
+    salida = pad(hh)+":"+pad(m)+":"+pad(s)+" "+ampm;
+  } else {
+    salida = "Opción no válida.";
+  }
+  document.write("<h2>" + salida + "</h2>");
+})();
+</script>
+</body>
+</html>
