@@ -1,142 +1,136 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>t5e2_parejas</title>
-  <style>
-    table { border-collapse: collapse; margin-top: 15px; }
-    td {
-      width: 110px; height: 110px;
-      border: 2px solid #333;
-      background: #2d7dd2;           
-      cursor: pointer;
-      background-size: cover;
-      background-position: center;
-    }
-    td.resuelta {
-      background: #8fd694;           
-      cursor: default;
-    }
-    td.vacia {
-      background: #f3f3f3;
-      cursor: default;
-      border-color: #bbb;
-    }
-    #contador { width: 60px; text-align: center; }
-  </style>
+    <meta charset="UTF-8" />
+    <title>t5e2_parejas</title>
+    <style>
+        table { border-collapse: collapse; margin-top: 15px; }
+        td {
+            width: 110px; height: 110px;
+            border: 2px solid #333;
+            background: #2d7dd2;           
+            cursor: pointer;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        td.resuelta {
+            background: #8fd694;           
+            cursor: default;
+        }
+        
+        td.vacia {
+            background: #f3f3f3;
+            cursor: default;
+            border-color: #bbb;
+        }
+        
+        #contador { width: 60px; text-align: center; }
+    </style>
 </head>
+
 <body>
 
-  <h2>Parejas Simpsons</h2>
-  Parejas: <input id="contador" type="text" value="0" readonly />
+    <h2>Parejas Simpsons</h2>
+    Parejas: <input id="contador" type="text" value="0" readonly />
 
-  <table>
-    <tbody id="tablero"></tbody>
-  </table>
+    <table>
+        <tbody id="tablero"></tbody>
+    </table>
 
-<script>
-  const imagenes = [
-    "images/bart.png",
-    "images/cani.png",
-    "images/homer.png",
-    "images/lisa.png",
-    "images/payaso.png",
-    "images/sadi.png"
-  ];
+    <script>
+    const imagenes = [
+        "images/bart.png",
+        "images/cani.png",
+        "images/homer.png",
+        "images/lisa.png",
+        "images/payaso.png",
+        "images/sadi.png"
+    ];
 
-  // 2) Creamos las 12 cartas (6 parejas x2) y barajamos
-  const cartas = barajar([...imagenes, ...imagenes]);
+    const cartas = barajar([...imagenes, ...imagenes]);
 
-  // 3) Construimos la tabla 3x4
-  const tablero = document.getElementById("tablero");
-  let idx = 0;
-  for (let r = 0; r < 3; r++) {
-    const tr = document.createElement("tr");
-    for (let c = 0; c < 4; c++) {
-      const td = document.createElement("td");
-      td.dataset.img = cartas[idx];     // qué imagen tiene esa carta
-      td.dataset.estado = "oculta";     // oculta | visible | resuelta
-      td.setAttribute("onclick", "voltear(this)");
-      tr.appendChild(td);
-      idx++;
-    }
-    tablero.appendChild(tr);
-  }
-
-  // Variables mínimas
-  let primera = null;
-  let bloqueo = false;
-
-  function voltear(celda) {
-    // Si estamos esperando a tapar, no dejamos clicar
-    if (bloqueo) return;
-
-    // Si ya está resuelta/vacía o ya está visible, no hacemos nada
-    if (celda.dataset.estado !== "oculta") return;
-
-    // Mostrar imagen
-    mostrar(celda);
-
-    // Si es la primera carta del intento, la guardamos
-    if (primera === null) {
-      primera = celda;
-      return;
+    const tablero = document.getElementById("tablero");
+    let idx = 0;
+    for (let r = 0; r < 3; r++) {
+        const tr = document.createElement("tr");
+        for (let c = 0; c < 4; c++) {
+            const td = document.createElement("td");
+            td.dataset.img = cartas[idx];     
+            td.dataset.estado = "oculta";     
+            td.setAttribute("onclick", "voltear(this)");
+            tr.appendChild(td);
+            idx++;
+        }
+        tablero.appendChild(tr);
     }
 
-    // Si es la segunda carta, comparamos
-    const segunda = celda;
+    let primera = null;
+    let bloqueo = false;
 
-    if (primera.dataset.img === segunda.dataset.img) {
-      // ✅ Pareja: se "borran" (quedan vacías) y se suma punto
-      marcarBorradas(primera, segunda);
-      sumarPunto();
-      primera = null;
-    } else {
-      // ❌ No pareja: esperamos un poco y las tapamos
-      bloqueo = true;
-      setTimeout(() => {
-        ocultar(primera);
-        ocultar(segunda);
-        primera = null;
-        bloqueo = false;
-      }, 700);
+    function voltear(celda) {
+    
+        if (bloqueo) return;
+
+        if (celda.dataset.estado !== "oculta") return;
+
+        mostrar(celda);
+
+        if (primera === null) {
+            primera = celda;
+            return;
+        }
+
+        const segunda = celda;
+
+        if (primera.dataset.img === segunda.dataset.img) {
+            marcarBorradas(primera, segunda);
+            sumarPunto();
+            primera = null;
+        } else {
+            bloqueo = true;
+            setTimeout(() => {
+                ocultar(primera);
+                ocultar(segunda);
+                primera = null;
+                bloqueo = false;
+            }, 700);
+        }
     }
-  }
 
-  function mostrar(celda) {
-    celda.style.backgroundImage = `url('${celda.dataset.img}')`;
-    celda.dataset.estado = "visible";
-  }
-
-  function ocultar(celda) {
-    celda.style.backgroundImage = "";
-    celda.dataset.estado = "oculta";
-  }
-
-  function marcarBorradas(a, b) {
-    // “Borrarlas”: las dejamos en blanco e inactivas
-    a.style.backgroundImage = "";
-    b.style.backgroundImage = "";
-    a.dataset.estado = "resuelta";
-    b.dataset.estado = "resuelta";
-    a.classList.add("vacia");
-    b.classList.add("vacia");
-    a.removeAttribute("onclick");
-    b.removeAttribute("onclick");
-  }
-
-  function sumarPunto() {
-    const input = document.getElementById("contador");
-    input.value = String(Number(input.value) + 1);
-  }
-
-  function barajar(arr) {
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
+    function mostrar(celda) {
+        celda.style.backgroundImage = `url('${celda.dataset.img}')`;
+        celda.dataset.estado = "visible";
     }
-    return arr;
-  }
+
+    function ocultar(celda) {
+        celda.style.backgroundImage = "";
+        celda.dataset.estado = "oculta";
+    }
+
+    function marcarBorradas(a, b) {
+        a.style.backgroundImage = "";
+        b.style.backgroundImage = "";
+        a.dataset.estado = "resuelta";
+        b.dataset.estado = "resuelta";
+        a.classList.add("vacia");
+        b.classList.add("vacia");
+        a.removeAttribute("onclick");
+        b.removeAttribute("onclick");
+    }
+
+    function sumarPunto() {
+        const input = document.getElementById("contador");
+        input.value = String(Number(input.value) + 1);
+    }
+
+    function barajar(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
 </script>
 
 </body>
