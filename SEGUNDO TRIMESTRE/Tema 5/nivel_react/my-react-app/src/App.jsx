@@ -1,26 +1,27 @@
-export default function App() {
-    return <ParentComponent />
-}
+function App() {
+    const estilos = 'estiloCSS'
 
-function ParentComponent() {
+    const users = [
+        { id: 1, name: 'Jose', role: 'Web Developer' },
+        { id: 2, name: 'Estefanía', role: 'Web Designer' },
+        { id: 3, name: 'Rubén', role: 'Team Leader' },
+        { id: 4, name: 'Iker', role: 'El puto jefe' },
+    ]
+    
     return (
-    <div>
-        <UserComponent />
-        <ProfileComponent />
-        <FeedComponent />
-    </div>
+        <>
+        <p>Lista de usuarios activos:</p>
+        <ul>
+        {users.map(function (user) {
+            return (
+            <li key={user.id}>
+                {user.name} — {user.role}
+            </li>
+            )
+        })}
+        </ul>
+        </>
     )
 }
 
-function UserComponent() {
-    return <h2>User component</h2>
-}
-
-function ProfileComponent() {
-    return <h2>Profile component</h2>
-}
-
-function FeedComponent() {
-    return <h2>Feed component</h2>
-}
-
+export default App
