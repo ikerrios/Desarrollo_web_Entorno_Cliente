@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de discos</title>
+</head>
+<body>
+
+<form action="#" method="post">
+    <h2>Alta de discos</h2>
+
+    <label for="nombre">Nombre del disco</label>
+    <input type="text" id="nombre" name="nombre" required><br>
+
+    <label for="grupo">Grupo / Cantante</label>
+    <input type="text" id="grupo" name="grupo" required><br>
+
+    <label for="año">Año de publicación</label>
+    <input type="number" id="año" name="año" min="1900" max="2100" required><br>
+
+    <label for="tipo">Tipo de música</label>
+    <select id="tipo" name="tipo" required>
+        <option value="">-- Selecciona un tipo --</option>
+        <option value="rock">Rock</option>
+        <option value="pop">Pop</option>
+        <option value="punk">Punk</option>
+        <option value="indie">Indie</option>
+    </select><br>
+
+    <label for="estanteria">Número de estantería</label>
+    <input type="number" id="estanteria" name="estanteria" min="1" required><br>
+
+    <label>
+        <input type="checkbox" name="prestado" value="true">
+        Prestado
+    </label><br>
+
+    <button type="submit">Guardar disco</button>
+</form>
+
+</body>
+</html>
+<script>
+    window.onload = function () {
+
+    const form = document.querySelector("form");
+
+    form.addEventListener("submit", function (e) {
+        let correcto = true;
+
+        const nombre = document.getElementById("nombre");
+        const grupo = document.getElementById("grupo");
+        const año = document.getElementById("año");
+        const estanteria = document.getElementById("estanteria");
+
+        if (!campo20(nombre)) correcto = false;
+        if (!campo20(grupo)) correcto = false;
+
+        if (!año4Numeros(año)) correcto = false;
+
+        if (!vacioONumero(estanteria)) correcto = false;
+
+        if (!correcto) e.preventDefault();
+    });
+};
+
+function campo20(input) {
+    const texto = input.value.trim();
+
+    if (texto.length === 0 || texto.length > 20) {
+        marcarError(input);
+        return false;
+    } else {
+        quitarError(input);
+        return true;
+    }
+}
+
+function año4Numeros(input) {
+    const patron = /^[0-9]{4}$/;
+
+    if (!patron.test(input.value.trim())) {
+        marcarError(input);
+        return false;
+    } else {
+        quitarError(input);
+        return true;
+    }
+}
+
+function vacioONumero(input) {
+    const texto = input.value.trim();
+
+    if (texto === "") {
+        quitarError(input);
+        return true;
+    }
+
+    if (!/^[0-9]+$/.test(texto)) {
+        marcarError(input);
+        return false;
+    } else {
+        quitarError(input);
+        return true;
+    }
+}
+
+
+function marcarError(input) {
+    input.style.border = "2px solid red";
+}
+
+function quitarError(input) {
+    input.style.border = "";
+}
+</script>

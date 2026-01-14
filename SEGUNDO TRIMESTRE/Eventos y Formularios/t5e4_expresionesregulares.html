@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Control de bolsas</title>
+    <style>
+        label{display:block;margin-top:10px;}
+        input{padding:6px;width:260px;}
+        .error{border:2px solid red;}
+    </style>
+</head>
+<body>
+
+<h3>Control bolsas</h3>
+
+<form id="formBolsa" action="#" method="post">
+    <label>Fecha (dd/mm/aaaa)
+        <input type="text" id="fecha">
+    </label>
+
+    <label>Cocinero (WW$1234)
+        <input type="text" id="cocinero">
+    </label>
+
+    <label>Destinatario (NM_alburquerque:1234)
+        <input type="text" id="destinatario">
+    </label>
+
+    <label>Gramos (100-5000)
+        <input type="text" id="gramos">
+    </label>
+
+    <label>Composición (200gC3OH7)
+        <input type="text" id="composicion">
+    </label>
+
+    <label>Cuenta EEUU (AB03-123456789012-0109)
+        <input type="text" id="cuenta">
+    </label>
+
+    <label>Cuenta sin guiones
+        <input type="text" id="cuentaLimpia" readonly>
+    </label>
+
+    <br><button type="submit">Guardar</button>
+</form>
+
+<script>
+window.onload = function () {
+    const form = document.getElementById("formBolsa");
+
+    form.addEventListener("submit", function (e) {
+    
+        let ok = true;
+
+        const fecha = document.getElementById("fecha");
+        const cocinero = document.getElementById("cocinero");
+        const destinatario = document.getElementById("destinatario");
+        const gramos = document.getElementById("gramos");
+        const composicion = document.getElementById("composicion");
+        const cuenta = document.getElementById("cuenta");
+        const cuentaLimpia = document.getElementById("cuentaLimpia");
+
+        [fecha,cocinero,destinatario,gramos,composicion,cuenta].forEach(x => x.classList.remove("error"));
+        cuentaLimpia.value = "";
+
+        if (!/^(0[1-9]|[12]\d|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/.test(fecha.value.trim())) {
+            fecha.classList.add("error"); ok = false;
+        }
+
+        if (!/^[A-Z]{2}[^A-Za-z0-9]\d{4}$/.test(cocinero.value.trim())) {
+            cocinero.classList.add("error"); ok = false;
+        }
+
+        if (!/^[A-Z]{2,3}_[a-z]+:\d{4}$/.test(destinatario.value.trim())) {
+            destinatario.classList.add("error"); ok = false;
+        }
+
+        if (!/^\d+$/.test(gramos.value.trim())) {
+            gramos.classList.add("error"); ok = false;
+        } else {
+            const n = Number(gramos.value);
+            if (n < 100 || n > 5000) { gramos.classList.add("error"); ok = false; }
+        }
+
+        if (!/^\d+g([A-Z]{1,2}\d?){2}$/.test(composicion.value.trim())) {
+            composicion.classList.add("error"); ok = false;
+        }
+
+        const limpia = validarCuenta(cuenta.value.trim());
+
+        if (!limpia) {
+            cuenta.classList.add("error"); ok = false;
+        } else {
+            cuentaLimpia.value = limpia; 
+        }
+
+        if (!ok) e.preventDefault();
+    });
+};
+
+function validarCuenta(texto) {
+    const m = texto.match(/^([A-Z]{2})(\d{2})-(\d{12})-(\d{4})$/);
+    
+    if (!m) return false;
+
+    const letras = m[1];
+    const dd = m[2];
+    const cuenta12 = m[3];
+    const control4 = m[4];
+
+    const v1 = letras.charCodeAt(0) - 64; // A=1
+    const v2 = letras.charCodeAt(1) - 64; // B=2
+    const suma = v1 + v2;
+    const suma2 = String(suma).padStart(2, "0");
+
+    if (dd !== suma2) return false;
+
+    const p6 = cuenta12.slice(0,6);
+    const u6 = cuenta12.slice(6);
+
+    const c1 = Math.floor(sumaDigitos(p6) / 6);
+    const c2 = Math.floor(sumaDigitos(u6) / 6);
+
+    const c1s = String(c1).padStart(2, "0");
+    const c2s = String(c2).padStart(2, "0");
+
+    if (control4 !== (c1s + c2s)) return false;
+
+    return letras + dd + cuenta12 + control4; 
+}
+
+function sumaDigitos(s) {
+    let total = 0;
+    for (let i = 0; i < s.length; i++) total += Number(s[i]);
+    return total;
+}
+</script>
+
+</body>
+</html>
