@@ -14,7 +14,7 @@ function App() {
         <ul>
         {users.map(function (user) {
             return (
-            <li key={user.id}>
+            <li key={user.id} className="estilosCSS">
                 {user.name} — {user.role}
             </li>
             )
