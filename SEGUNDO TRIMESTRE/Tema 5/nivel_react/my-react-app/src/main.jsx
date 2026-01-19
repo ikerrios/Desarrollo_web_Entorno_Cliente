@@ -5,6 +5,6 @@ import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App newEmails={"Hola hola"}/>
-  </React.StrictMode>,
+    <App user={true}/>
+  </React.StrictMode>
 )
