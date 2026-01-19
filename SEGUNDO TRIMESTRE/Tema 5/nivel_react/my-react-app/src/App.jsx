@@ -1,28 +1,12 @@
-import './index.css'
-import { useState } from 'react'
-
-function ChildComponent(props) {
+function App() {
+  const newEmails = 2
+  
   return (
     <>
-      <h1>Hello {props.name}</h1>
-      <button onClick={() => props.setName("Cipriano")}>Cambiar a Cipriano</button>
-      <br/>
-      <button onClick={() => props.setName("Klara")}>Cambiar a Klara</button>
+      <h1>Hola chavules</h1>
+      {newEmails > 0 && (
+        <h2>Tienes {newEmails} nuevas palomas mensajeras esperando.</h2>
+      )}
     </>
   )
 }
-
-function ParentComponent() {
-  const [name, setName] = useState("Iker")
-  return <ChildComponent name={name} setName = {setName}/>
-}
-
-function App() {
-  return (
-    <div>
-      <ParentComponent />
-    </div>
-  )
-}
-
-export default App
