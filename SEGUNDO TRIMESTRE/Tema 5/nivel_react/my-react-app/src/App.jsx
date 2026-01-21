@@ -1,34 +1,23 @@
 import { useState } from 'react'
 
-export default function App() {
-  const [user, setUser] = useState(null)
-  const [newEmails, setNewEmails] = useState(0)
-
-  const button = user
-    ? <button onClick={() => setUser(null)}>Logout</button>
-    : <button onClick={() => setUser({ name: 'Iker Ríos' })}>Login</button>
+function App() {
+  const [email, setEmail] = useState('')
+  const [msg, setMsg] = useState('')
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setMsg(`Inscripcion enviada para: ${email}`)
+  }
 
   return (
     <>
-      <h1>Nivel 5: Renderizado condicional</h1>
-
-      {button}
-
-      {/* Ternario en JSX */}
-      {user
-        ? <p>Bienvenido, {user.name}.</p>
-        : <p>Inicia sesión para continuar.</p>
-      }
-
-      <hr />
-
-      <button onClick={() => setNewEmails((n) => n + 1)}>+1 email</button>
-      <button onClick={() => setNewEmails(0)}>Reset</button>
-
-      {/* Renderizado en línea con && */}
-      {newEmails > 0 && (
-        <h2>Tienes {newEmails} correos nuevos.</h2>
-      )}
+      <h1>Registro</h1>
+      <form onSubmit={handleSubmit}>
+      <input type="email" placeholder="tu@email.com" value={email} onChange={(e) => setEmail(e.target.value)} required/>
+        <button type="submit">Enviar</button>
+      </form>
+      {msg && <p>{msg}</p>}
     </>
   )
 }
+
+export default App
