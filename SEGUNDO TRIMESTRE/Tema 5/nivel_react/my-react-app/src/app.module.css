@@ -1,0 +1,13 @@
+/* App.module.css */
+
+.baseText {
+  font-size: 18px;
+}
+
+.primary {
+  color: blue;
+}
+
+.secondary {
+  color: green;
+}
